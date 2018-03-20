@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -47,10 +47,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        //表达式里的第二个 captcha 是 mews/captcha 自定义的表单验证规则。扩展包非常巧妙地利用了 Laravel 表单验证器提供的 自定义表单验证规则 功能。
+        //第三个参数是用户自定义错误提示
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'captcha'   =>'required|captcha',
+        ],[
+            'captcha.required' => '验证码不准为空' ,
+            'captcha.captcha' => '请输入正确的验证码',
         ]);
     }
 
@@ -58,7 +64,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
