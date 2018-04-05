@@ -13,8 +13,7 @@ class EventListener
      *
      * @return void
      */
-    protected $listen = [
-];
+    protected $listen = [];
 
     public function __construct()
     {
