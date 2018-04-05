@@ -14,3 +14,7 @@
 Route::get('/','PagesController@index')->name('home');
 //注册登陆路由
 Auth::routes();
+
+//用户中心路由
+Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+

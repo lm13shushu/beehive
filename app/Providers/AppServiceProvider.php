@@ -11,9 +11,12 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    //AppServiceProvider 是框架的核心，在 Laravel 启动时，会最先加载该文件
     public function boot()
     {
         //
+         \Carbon\Carbon::setLocale('zh');
     }
 
     /**

@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','introduction','avatar',
     ];
 
     /**
@@ -26,6 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+//boot方法在用户模型类初始化之后进行加载，在其中添加监听方法
+    public static function boot(){
+        
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->activation_token =str_random(30);
+        });
+
+    }
 
     public function sendPasswordResetNotification($token){
         $this->notify(new ResetPassword($token));
