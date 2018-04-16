@@ -10,7 +10,11 @@ use App\Handlers\ImageUploadHandler;
 
 class UsersController extends Controller
 {
-    //
+    //middleware 方法，该方法接收两个参数，第一个为中间件的名称，第二个为要进行过滤的动作。
+    public function __construct(){
+        $this->middleware('auth',['except'=>['show']]);
+    }
+
     public function show(User $user){
         return view('users.show',compact('user'));
     }
@@ -22,6 +26,7 @@ class UsersController extends Controller
 
     public function update(UserRequest $request,ImageUploadHandler $uploader,User $user)
     {
+         $this->authorize('update', $user);
         //dd($request->avatar);
         $data = $request->all();
         if($request->avatar){
