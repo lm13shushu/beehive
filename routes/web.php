@@ -18,3 +18,5 @@ Auth::routes();
 //用户中心路由
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
+
+Route::resource('microblogs', 'MicroblogsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
