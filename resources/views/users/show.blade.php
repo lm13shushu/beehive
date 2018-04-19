@@ -23,36 +23,30 @@
                         </div>
                     </div>
                     <div class="user-name-description">
-                        <h5><a href="#"><span class="glyphicon glyphicon-user"></span></a>&nbsp;{{ $user->name }}</h5>
+                        <h5><a href="#"><span class="glyphicon glyphicon-user" value="{{ $user->id }}"></span></a>&nbsp;{{ $user->name }}</h5>
                         <h5><a href="#"><span class="glyphicon glyphicon-tag"></span></a>&nbsp;{{ $user->introduction }}</h5>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row clearfix" style="margin-top:20px;">
-            <div class="col-md-2 column">
-                <div class="list-group">
-                     <a href="#" class="list-group-item active">操作</a>
-                    <div class="list-group-item">
-                        我的微博
-                    </div>
-                    <div class="list-group-item">
-                            回复
-                    </div>
-                    <div class="list-group-item">
-                         <span class="badge">14</span> Help
+        {{-- 左部信息展示 --}}
+        <div class="row clearfix" style="margin-top:20px;margin-right:0px;">
+                <div class="col-md-2 column">
+                    <div class="btn-group-vertical col-md-12" style="margin: 0;padding: 0;">
+                        <button type="button" class="btn btn-default createForm">新微博</button>
+                        <button type="button" class="btn btn-default show-person-microblogs">我的微博</button>
                     </div>
                 </div>
-            </div>
 
-            <!-- 左部具体信息展示 -->
-            <div class="col-md-10 column" style="border:1px solid black;">
+            <!-- 右部具体信息展示 -->
+             <div class="col-md-10 column"  style="border-left:1px solid #f5f5f5;">
                 <div class="row clearfix">
-                    <div class="col-md-12 column">
+                    <div class="col-md-12" id="show-person-info">
+                        @include('microblogs._createForm')
                     </div>
                 </div>
-            </div>
+             </div>
         </div>
     </div>
 @stop

@@ -41,4 +41,8 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token){
         $this->notify(new ResetPassword($token));
     }
+
+    public function microblogs(){
+        return $this->hasMany(Microblog::class);
+    }
 }

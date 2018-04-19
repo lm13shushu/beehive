@@ -8461,3 +8461,58 @@ body .container {
   font-family: Arial;
 }
 
+/*microblog index*/
+
+.microblogs {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.microblogs li {
+  padding: 5px 0;
+  border-top: 1px solid #e8e8e8;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.microblogs .user {
+  margin-top: 5em;
+  padding-top: 0;
+}
+
+.microblogs .content {
+  color: black;
+  display: block;
+  margin-left: 55px;
+  word-break: break-word;
+}
+
+.microblogs .content img {
+  display: block;
+  padding: 5px 0;
+}
+
+.microblogs .timestamp {
+  color: #777777;
+  display: block;
+  margin-left: 55px;
+  margin-top: -25px;
+}
+
+.microblogs .avatar {
+  margin-right: 5px;
+  margin-top: 25px;
+}
+
+.microblogs form button.microblog-delete-btn {
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+
+aside textarea {
+  height: 100px;
+  margin-bottom: 5px;
+}
+

@@ -990,7 +990,21 @@ window.Vue = __webpack_require__(35);
 Vue.component('example-component', __webpack_require__(38));
 
 var app = new Vue({
-  el: '#app'
+    el: '#app'
+});
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$('.createForm').click(function () {
+    $('#show-person-info').load('/microblogs/create');
+});
+
+$('.show-person-microblogs').click(function () {
+    $('#show-person-info').load('/users/' + $('.glyphicon-user').attr("value") + '/microblogs');
 });
 
 /***/ }),

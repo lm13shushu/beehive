@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Microblog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MicroblogRequest;
+
 
 class MicroblogsController extends Controller
 {
@@ -14,10 +16,12 @@ class MicroblogsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index()
+    public function showPerson(User $user)
     {
-        $microblogs = Microblog::paginate(30);
-        return view('microblogs.index', compact('microblogs'));
+        $microblogs = $user->microblogs()
+                             ->orderBy('created_at','desc')
+                             ->paginate(20);
+        return view('microblogs._microblog', compact('user','microblogs'));
     }
 
     public function show(Microblog $microblog)
@@ -25,9 +29,9 @@ class MicroblogsController extends Controller
         return view('microblogs.show', compact('microblog'));
     }
 
-    public function create(Microblog $microblog)
+    public function create()
     {
-        return view('microblogs.create_and_edit', compact('microblog'));
+        return view('microblogs._createForm');
     }
 
     public function store(MicroblogRequest $request)
