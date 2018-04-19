@@ -32,10 +32,10 @@
 
         {{-- 左部信息展示 --}}
         <div class="row clearfix" style="margin-top:20px;margin-right:0px;">
-                <div class="col-md-2 column">
-                    <div class="btn-group-vertical col-md-12" style="margin: 0;padding: 0;">
-                        <button type="button" class="btn btn-default createForm">新微博</button>
-                        <button type="button" class="btn btn-default show-person-microblogs">我的微博</button>
+                <div class="col-md-2 column" >
+                    <div  style="margin: 0;padding: 0;">
+                        <button type="button" class="btn btn-default btn-block createForm {{ active_class(if_route('microblogs.create')) }}">新微博</button>
+                        <button type="button" class="btn btn-default btn-block show-person-microblogs {{ active_class(if_route('microblogs.showPerson')) }}">我的微博</button>
                     </div>
                 </div>
 
