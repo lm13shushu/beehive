@@ -11,6 +11,8 @@
     <meta name="description" content="@yield('description', 'welcome to behive')" />
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.qeditor.css') }}" rel="stylesheet">
+    <link href="http://cdn.staticfile.org/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="app" class="{{ route_class() }}-page">
@@ -26,7 +28,6 @@
      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script> 
     <script src="{{ asset('js/jquery.qeditor.js') }}"></script> 
-     @yield('scripts')
-     
+    @yield('scripts')    
 </body>
 </html>

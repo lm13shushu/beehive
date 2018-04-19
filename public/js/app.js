@@ -1007,6 +1007,8 @@ $('.show-person-microblogs').click(function () {
     $('#show-person-info').load('/users/' + $('.glyphicon-user').attr("value") + '/microblogs');
 });
 
+$("#post_body").qeditor({});
+
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
