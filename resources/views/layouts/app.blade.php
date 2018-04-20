@@ -22,12 +22,16 @@
                 @include('layouts._message')
             </div>
             @yield('content')
+            @include('microblogs._fastCreateForm')
         </div>
         @include('layouts._footer')
     </div>
      <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script> 
     <script src="{{ asset('js/jquery.qeditor.js') }}"></script> 
+    <script type="text/javascript">
+        $("#fastC_post_body").qeditor({});
+    </script>
     @yield('scripts')    
 </body>
 </html>

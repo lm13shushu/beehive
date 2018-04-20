@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Microblog;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MicroblogRequest;
+use Auth;
 
 
 class MicroblogsController extends Controller
@@ -15,28 +17,34 @@ class MicroblogsController extends Controller
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
-
+    //展示个人所发的微博
     public function showPerson(User $user)
     {
         $microblogs = $user->microblogs()
-                             ->orderBy('created_at','desc')
-                             ->paginate(20);
+                                     ->orderBy('created_at','desc')
+                                     ->paginate(20);
         return view('microblogs._microblog', compact('user','microblogs'));
     }
 
     public function show(Microblog $microblog)
     {
-        return view('microblogs.show', compact('microblog'));
+        $categories =Category::all();
+        return view('microblogs.show', compact('microblog','categories'));
     }
 
     public function create()
     {
-        return view('microblogs._createForm');
+        $categories =Category::all();
+        return view('microblogs._createForm',compact('categories'));
     }
-
-    public function store(MicroblogRequest $request)
+    
+    //store() 方法的第二个参数，会创建一个空白的 $topic 实例
+    public function store(MicroblogRequest $request,Microblog $microblog)
     {
-        $microblog = Microblog::create($request->all());
+        // fill 方法会将传参的键值数组填充到模型的属性中
+        $microblog->fill($request->all());
+        $microblog->user_id =Auth::id();
+        $microblog ->save();
         return redirect()->route('microblogs.show', $microblog->id)->with('message', 'Created successfully.');
     }
 

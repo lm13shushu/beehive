@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
+use App\Models\Category;
 use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;
 
@@ -16,7 +17,8 @@ class UsersController extends Controller
     }
 
     public function show(User $user){
-        return view('users.show',compact('user'));
+        $categories = Category::all();
+        return view('users.show',compact('user','categories'));
     }
     
     public function edit(User $user){

@@ -9,9 +9,10 @@ use App\Models\Microblog;
 
 class MicroblogObserver
 {
-    public function creating(Microblog $microblog)
+    public function saving(Microblog $microblog)
     {
         //
+        $microblog->excerpt = make_excerpt($microblog->content);
     }
 
     public function updating(Microblog $microblog)
