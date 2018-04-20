@@ -27,12 +27,19 @@ $.ajaxSetup({
     }
 });
 
+
 $('.createForm').click( function() {
-    $('#show-person-info').load('/microblogs/create');
+    $('#show-person-info').load('/microblogs/create',function(responseTxt,statusTxt,xhr){
+        if(statusTxt=="success"){
+            $("#post_body").qeditor({});
+        }
+    });
 });
 
 $('.show-person-microblogs').click( function() {
     $('#show-person-info').load('/users/' +　$('.glyphicon-user').attr("value") 　+　'/microblogs');
 });
 
- $("#post_body").qeditor({});
+
+
+
