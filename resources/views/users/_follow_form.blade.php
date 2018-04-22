@@ -12,8 +12,5 @@
           </form>
     @endif
 @else
-    <form action="{{ route('users.edit',$user->id) }}" method="post">
-            {{ csrf_field() }}
-            <button type="submit" class="btn btn-sm btn-default">编辑个人资料</button>
-    </form>
+    <a href="{{ route('users.edit', Auth::id()) }}"><span class="btn btn-sm btn-default">个人资料编辑</span></a>
 @endif
