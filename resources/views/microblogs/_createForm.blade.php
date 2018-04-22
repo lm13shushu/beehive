@@ -1,5 +1,6 @@
   <form class="form-horizontal" method="POST" action="{{ route('microblogs.store') }}">
     {{ csrf_field() }}
+    @include('common.error')
     <select class="form-control" name="category_id" required>
         <option value="">请选择#话题#</option>
         @foreach ($categories as $value)

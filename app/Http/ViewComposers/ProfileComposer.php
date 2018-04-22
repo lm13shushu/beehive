@@ -22,11 +22,11 @@ class ProfileComposer
      * @param UserRepository $users
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct()
     {
         // Dependencies automatically resolved by service container...
         //$this->users = $users;
-        $this->categories = $category->get();
+        $this->categories =Category::all();
     }
 
     /**
@@ -37,6 +37,6 @@ class ProfileComposer
      */
     public function compose(View $view)
     {
-        $view->with('categories',compact($this->categories));
+        $view->with('categories',$this->categories);
     }
 }

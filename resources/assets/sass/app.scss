@@ -117,7 +117,7 @@ body {
 
 //microblog
 
-/*microblog index*/
+/*singleMicroblog index*/
 .microblogs{
   list-style: none;
   padding: 0;
@@ -167,3 +167,47 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+
+// userInfo
+
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+  a {
+    float: left;
+    padding: 0 10px;
+    text-align: center;
+    width: 33%;
+    border-left: 1px solid $gray-lighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: #337ab7;
+    }
+  }
+  strong {
+    display: block;
+    font-size: 1.2em;
+    color: black;
+  }
+}
+ 

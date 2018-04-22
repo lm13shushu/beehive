@@ -31,9 +31,10 @@
                 @else
                     <li>
                         <span aria-hidden="true">
-                            <button class="glyphicon glyphicon-plus btn btn-default" data-toggle="modal" data-target="#myModal" style="background-color: #f5f5f5;height:50px;border:0;"></button>
+                            <button class="glyphicon glyphicon-plus btn btn-default" data-toggle="modal" data-target="#myModal" style="background-color: #f5f5f5;height:48px;border:0;"></button>
                         </span>
                     </li>
+                    <li><a href="{{  route('users.index')  }}"><span class="glyphicon glyphicon-plus glyphicon-th-list"></span></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">

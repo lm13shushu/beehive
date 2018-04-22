@@ -7,6 +7,9 @@ use App\Models\Microblog;
 
 class MicroblogPolicy extends Policy
 {
+
+    //授权类需要在AuthServiceProvider中注册
+
     public function update(User $user, Microblog $microblog)
     {
         // return $microblog->user_id == $user->id;
@@ -15,6 +18,6 @@ class MicroblogPolicy extends Policy
 
     public function destroy(User $user, Microblog $microblog)
     {
-        return true;
+        return $user->id === $microblog->user_id;
     }
 }

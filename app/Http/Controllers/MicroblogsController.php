@@ -28,14 +28,14 @@ class MicroblogsController extends Controller
 
     public function show(Microblog $microblog)
     {
-        $categories =Category::all();
-        return view('microblogs.show', compact('microblog','categories'));
+        //$categories =Category::all();
+        return view('microblogs.show', compact('microblog'));
     }
 
     public function create()
     {
-        $categories =Category::all();
-        return view('microblogs._createForm',compact('categories'));
+        //$categories =Category::all();
+        return view('microblogs._createForm');
     }
     
     //store() 方法的第二个参数，会创建一个空白的 $topic 实例

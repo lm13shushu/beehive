@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Status;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $feed_items = [];
+        if(Auth::check()){
+            $feed_items = Auth::user()->feed()->paginate(20);
+        }
+        return view('pages.root',compact('feed_items'));
     }
 }

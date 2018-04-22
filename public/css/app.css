@@ -8461,7 +8461,7 @@ body .container {
   font-family: Arial;
 }
 
-/*microblog index*/
+/*singleMicroblog index*/
 
 .microblogs {
   list-style: none;
@@ -8514,5 +8514,50 @@ body .container {
 aside textarea {
   height: 100px;
   margin-bottom: 5px;
+}
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.users li {
+  overflow: auto;
+  padding: 10px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+}
+
+.stats a {
+  float: left;
+  padding: 0 10px;
+  text-align: center;
+  width: 33%;
+  border-left: 1px solid #eeeeee;
+  color: gray;
+}
+
+.stats a:first-child {
+  padding-left: 0;
+  border: 0;
+}
+
+.stats a:hover {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+.stats strong {
+  display: block;
+  font-size: 1.2em;
+  color: black;
 }
 

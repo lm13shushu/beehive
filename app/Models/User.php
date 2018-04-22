@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -45,4 +46,55 @@ class User extends Authenticatable
     public function microblogs(){
         return $this->hasMany(Microblog::class);
     }
+
+    // Eloquent 关联的 预加载 with 方法，预加载避免了 N+1 查找的问题，提高查询效率
+    //可以简单理解为 followings 返回的是数据集合，而 followings() 返回的是数据库查询语句
+    public function feed()
+    {
+        $user_ids = Auth::user()->followings->pluck('id')->toArray();
+        array_push($user_ids,Auth::user()->id);
+        return Microblog::whereIn('user_id',$user_ids)
+                                        ->with('user')
+                                        ->orderBy('created_at','desc');
+    }
+
+    //获取粉丝列表
+    public function followers()
+    {
+        //在 Laravel 中会默认将两个关联模型的名称进行合并并按照字母排序,把关联表名改为 followers,user_id是关联中模型外键名，follower_id是合并模型的外键名
+        return $this->belongsToMany(User::class,'followers','user_id','follower_id');
+    }
+
+    //获取用户关注人列表
+     public function followings()
+    {
+        return $this->belongsToMany(User::Class, 'followers', 'follower_id', 'user_id');
+    }
+
+    //关注
+    public function follow($user_ids)
+    {
+        if(!is_array($user_ids)){
+            $user_ids = compact('user_ids');
+        }
+        //Sync方法接收两个参数，第一个参数是要添加的id，第二个参数是是否移除之前的关联id
+         $this->followings()->sync($user_ids, false);
+
+    }
+
+    //取消关注
+    public function unfollow($user_ids)
+    {
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
+        }
+        $this->followings()->detach($user_ids);
+    }
+
+    //查看是否已经关注过此人
+    public function isFollowing($user_id)
+    {
+        return $this->followings->contains($user_id);
+    }    
+
 }

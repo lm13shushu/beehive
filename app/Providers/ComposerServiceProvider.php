@@ -15,7 +15,7 @@ class ComposerServiceProvider extends ServiceProvider
     {
          // 使用基于类的composers...
         view()->composer(
-            ['microblogs._fastCreateForm'], 'App\Http\ViewComposers\ProfileComposer'
+            ['microblogs._fastCreateForm','microblogs._createForm'], 'App\Http\ViewComposers\ProfileComposer'
         );
 
     }

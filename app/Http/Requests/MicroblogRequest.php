@@ -13,6 +13,8 @@ class MicroblogRequest extends Request
             {
                 return [
                     // CREATE ROLES
+                    'content'       => 'required|max:250',
+                    'category_id' => 'required|numeric',
                 ];
             }
             // UPDATE
@@ -36,6 +38,7 @@ class MicroblogRequest extends Request
     {
         return [
             // Validation messages
+            'content.max' => '微博内容不得超过250个字！'
         ];
     }
 }
