@@ -45,7 +45,7 @@ class MicroblogsController extends Controller
         $microblog->fill($request->all());
         $microblog->user_id =Auth::id();
         $microblog ->save();
-        return redirect()->route('microblogs.show', $microblog->id)->with('message', 'Created successfully.');
+        return redirect()->route('home')->with('message', 'Created successfully.');
     }
 
     public function edit(Microblog $microblog)
