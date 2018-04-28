@@ -185,6 +185,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         //image处理扩展
         Intervention\Image\ImageServiceProvider::class,
+        //无限极树状层级结构支持
+        Baum\Providers\BaumServiceProvider::class,
     ],
 
     /*
@@ -235,7 +237,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Baum' => Baum\Providers\BaumServiceProvider::class,
     ],
 
 ];

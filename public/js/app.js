@@ -999,6 +999,13 @@ $.ajaxSetup({
     }
 });
 
+$(document).ready(function () {
+    $('.show-reply').click(function () {
+        var replyId = $(this).attr("value");
+        $("#replyForm-" + replyId).toggle();
+    });
+});
+
 $('.createForm').click(function () {
     $('#show-person-info').load('/microblogs/create', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success") {

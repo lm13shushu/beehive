@@ -35,3 +35,14 @@ Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.
 //关注用户和取消关注用户
 Route::post('/users/followers/{user}', 'FollowersController@store')->name('followers.store');
 Route::delete('/users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
+
+//获取评论和回复的路由
+Route::post('/microblogs/{microblog}/storeComment','CommentsController@store')->name('comments.store');
+Route::post('/microblogs/{microblog}/comments/{replyObject}','CommentsController@storeReplies')->name('comments.storeReplies');
+
+//删除回复路由
+Route::post('/comments/{comment}/destroy','CommentsController@destroy')->name('comments.destroy');
+
+//通知路由
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
+

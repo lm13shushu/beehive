@@ -8472,7 +8472,7 @@ body .container {
 .microblogs li {
   padding: 5px 0;
   border-top: 1px solid #e8e8e8;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   position: relative;
 }
 
@@ -8559,5 +8559,19 @@ aside textarea {
   display: block;
   font-size: 1.2em;
   color: black;
+}
+
+/* Notifications badge */
+
+.notifications-badge {
+  margin-top: -1;
+}
+
+.notifications-badge .badge-fade {
+  background-color: #EBE8E8;
+}
+
+.notifications-badge .badge-hint {
+  background-color: #d15b47 !important;
 }
 

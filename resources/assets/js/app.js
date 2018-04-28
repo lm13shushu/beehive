@@ -27,6 +27,12 @@ $.ajaxSetup({
     }
 });
 
+$(document).ready(function(){
+    $('.show-reply').click(function() {
+        var replyId= $(this).attr("value");
+        $("#replyForm-" + replyId).toggle();
+    });
+});
 
 $('.createForm').click( function() {
     $('#show-person-info').load('/microblogs/create',function(responseTxt,statusTxt,xhr){
@@ -39,5 +45,3 @@ $('.createForm').click( function() {
 $('.show-person-microblogs').click( function() {
     $('#show-person-info').load('/users/' +　$('.glyphicon-user').attr("value") 　+　'/microblogs');
 });
-
-

@@ -3,9 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class CommentPolicy extends Policy
 {
     use HandlesAuthorization;
 
@@ -19,7 +20,8 @@ class UserPolicy
         //
     }
 
-    public function update(User $currentUser,User $user){
-        return $currentUser->id === $user->id;
+    public function destroy(User $user,Comment $comment)
+    {
+        return $user->id === $comment->from_uid;
     }
 }

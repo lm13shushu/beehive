@@ -9,7 +9,10 @@ use Auth;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable{
+        //将原方法改名
+        notify as protected laravelNotify;
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -45,6 +48,10 @@ class User extends Authenticatable
 
     public function microblogs(){
         return $this->hasMany(Microblog::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
 
     // Eloquent 关联的 预加载 with 方法，预加载避免了 N+1 查找的问题，提高查询效率
@@ -96,5 +103,22 @@ class User extends Authenticatable
     {
         return $this->followings->contains($user_id);
     }    
+
+     public function notify($instance)
+    {
+        // 如果要通知的人是当前用户，就不必通知了！
+        if ($this->id == Auth::id()) {
+            return;
+        }
+        $this->increment('notification_count');
+        $this->laravelNotify($instance);
+    }
+
+    public function markAsRead()
+    {
+        $this->notification_count = 0;
+        $this->save();
+        $this->unreadNotifications->markAsRead();
+    }
 
 }

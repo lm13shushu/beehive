@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Microblog;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MicroblogRequest;
@@ -29,7 +30,16 @@ class MicroblogsController extends Controller
     public function show(Microblog $microblog)
     {
         //$categories =Category::all();
-        return view('microblogs.show', compact('microblog'));
+        $commentsList = [];
+        $user = $microblog->User;
+        $comments = $microblog->comments()
+                                            ->orderBy('created_at','desc')
+                                            ->paginate(10);
+        foreach($comments as $k => $comment){
+            $commentsList[$k]=$comment->getDescendantsAndSelf();
+        }
+        //dd($commentsList);
+        return view('microblogs.show', compact('microblog','user','commentsList'));
     }
 
     public function create()
@@ -46,20 +56,6 @@ class MicroblogsController extends Controller
         $microblog->user_id =Auth::id();
         $microblog ->save();
         return redirect()->route('home')->with('message', 'Created successfully.');
-    }
-
-    public function edit(Microblog $microblog)
-    {
-        $this->authorize('update', $microblog);
-        return view('microblogs.create_and_edit', compact('microblog'));
-    }
-
-    public function update(MicroblogRequest $request, Microblog $microblog)
-    {
-        $this->authorize('update', $microblog);
-        $microblog->update($request->all());
-
-        return redirect()->route('microblogs.show', $microblog->id)->with('message', 'Updated successfully.');
     }
 
     public function destroy(Microblog $microblog)

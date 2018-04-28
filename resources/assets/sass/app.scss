@@ -125,7 +125,7 @@ body {
   li {
     padding: 5px 0;
     border-top: 1px solid #e8e8e8;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     position: relative;
   }
   .user {
@@ -209,5 +209,19 @@ aside {
     font-size: 1.2em;
     color: black;
   }
+}
+
+/* Notifications badge */
+
+.notifications-badge {
+    margin-top: -1;
+
+    .badge-fade {
+        background-color: #EBE8E8;
+    }
+
+    .badge-hint {
+        background-color: #d15b47 !important;;
+    }
 }
  

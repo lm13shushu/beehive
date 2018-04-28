@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
 	{
 		\App\Models\User::observe(\App\Observers\UserObserver::class);
 		\App\Models\Microblog::observe(\App\Observers\MicroblogObserver::class);
+                     \App\Models\Comment::observe(\App\Observers\CommentObserver::class);
         //
          \Carbon\Carbon::setLocale('zh');
     }
