@@ -9,7 +9,7 @@
         <div class="media-heading">
             <a href="{{ route('users.show', $notification->data['comment_user_id']) }}">{{ $notification->data['comment_user_name'] }}</a>
             评论了
-            <a href="#">{{ $notification->data['microblog_content'] }}</a>
+            <a href="{{ $notification->data['microblog_link'] }}">{{ $notification->data['microblog_content'] }}</a>
 
             {{-- 回复删除按钮 --}}
             <span class="meta pull-right" title="{{ $notification->created_at }}">

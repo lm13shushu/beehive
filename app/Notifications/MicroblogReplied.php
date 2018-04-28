@@ -25,7 +25,7 @@ class MicroblogReplied extends Notification
     {
         //注入回复实体，方便toDatabase方法中使用
         $this->comment = $comment;
-        $this->microblog = $comment->microblog_id;
+        $this->microblog_id = $comment->microblog_id;
     }
 
     /**
@@ -69,7 +69,7 @@ class MicroblogReplied extends Notification
         }
         $microblog= $this->comment->getRoot()->microblog;
         $microblog_content = $microblog->content;
-        //$link = $microblog->link(['#microblog' . $this->microblog_id]);
+        $link = getenv('APP_URL')."/microblogs/".$this->microblog_id;
        
         return[
             'comment_id' =>$this->comment->id,
@@ -79,6 +79,7 @@ class MicroblogReplied extends Notification
             'comment_user_avatar' => $this->comment->user->avatar,
             'microblog_id' => $this->microblog_id, 
             'microblog_content' => $microblog_content,
+            'microblog_link' => $link,
         ];
     }
 

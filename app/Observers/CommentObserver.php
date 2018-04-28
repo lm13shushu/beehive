@@ -11,9 +11,14 @@ use App\Notifications\MicroblogReplied;
 
 class CommentObserver
 {
-     public function created(Comment $comment)
+     public function saved(Comment $comment)
     {
-        $microblog = $comment->microblog;
+        if($comment->microblog_id==null){
+            $microblog=$comment->getRoot()->microblog;
+        }else{
+            $microblog = $comment->microblog;
+        }
+        //dd($microblog);
         $microblog->increment('reply_count', 1);
 
         // 通知作者话题被回复了，自定义notify方法
