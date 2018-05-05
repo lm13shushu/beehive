@@ -82,7 +82,7 @@ class MicroblogReplied extends Notification
             'comment_user_name' => $this->comment->user->name,
             'comment_user_avatar' => $this->comment->user->avatar,
             'to_user_id' =>  $this->comment->to_uid,
-            'to_comment' => compact($this->parentComment), 
+            'to_comment' => $this->parentComment, 
             'microblog_id' => $microblog_id, 
             'microblog_content' => $microblog_content,
             'link' => $link,
