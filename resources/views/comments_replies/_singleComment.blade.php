@@ -11,7 +11,7 @@
     @if($comment->parent_id != 0)
         <span>回复</span>
         <span class="user">
-            <a href="{{ route('users.show', $comment_user->id ) }}">{{ "@".$comment_user->name }}</a>
+            <a href="{{ route('users.show', $comment_user->id ) }}">{{ "@".$to_user->name}}</a>
         </span>
     @endif
     <span class="timestamp" style="color: #727b20;">

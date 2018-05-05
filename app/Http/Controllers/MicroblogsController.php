@@ -34,6 +34,7 @@ class MicroblogsController extends Controller
         $user = $microblog->User;
         $comments = $microblog->comments()
                                             ->orderBy('created_at','desc')
+                                            ->with('user')
                                             ->paginate(10);
         foreach($comments as $k => $comment){
             $commentsList[$k]=$comment->getDescendantsAndSelf();

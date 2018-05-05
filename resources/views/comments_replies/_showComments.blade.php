@@ -2,7 +2,7 @@
     <ol class="comments" style="list-style: none;">
         @foreach ($commentsList as $k => $comments)
                 @foreach($comments as $comment)
-                        @include('comments_replies._singleComment',['comment_user' => $comment->user])
+                        @include('comments_replies._singleComment',['comment_user' => $comment->user,'to_user'=>$comment->toUser])
                 @endforeach
         @endforeach
     </ol>
