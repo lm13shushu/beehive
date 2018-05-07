@@ -5,6 +5,8 @@
         @endforeach
     </ol>
      {!! $microblogs->render() !!}
+     @else
+     <h3>暂无微博，赶快去发一个吧！</h3>
 @endif
 
 
