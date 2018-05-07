@@ -53,19 +53,19 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{ route('users.show', Auth::id()) }}">
-                                    个人页面
+                                    <span class="glyphicon glyphicon-user"></span>&nbsp;个人页面
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('users.edit', Auth::id()) }}">
-                                    资料编辑
+                                    <span class="glyphicon glyphicon-edit"></span>&nbsp;资料编辑
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                    退出登录
+                                    <span class="glyphicon glyphicon-log-out"></span>&nbsp;退出登录
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

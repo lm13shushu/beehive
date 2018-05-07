@@ -23,7 +23,10 @@ class UsersController extends Controller
 
     public function show(User $user){
         //$categories = Category::all();
-        return view('users.show',compact('user'));
+        $microblogs = $user->microblogs()
+                                     ->orderBy('created_at','desc')
+                                     ->paginate(10);
+        return view('users.show',compact('user','microblogs'));
     }
     
     public function edit(User $user){

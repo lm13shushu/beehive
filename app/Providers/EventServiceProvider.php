@@ -14,7 +14,13 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\Event' => [
-            'App\Listeners\EventListener',
+            'App\Listeners\EventListener',            
+        ],
+         'App\Events\MicroblogViewEvent' => [
+                'App\Listeners\MicroblogEventListener',
+        ],
+        'App\Events\MicroblogLikeEvent' => [
+                'App\Listeners\LikeEventListener',
         ],
     ];
 

@@ -21,8 +21,8 @@ class MicroblogsTableSeeder extends Seeder
 
                 $microblog->user_id = $faker->randomElement($user_ids);
                 $microblog->category_id = $faker->randomElement($category_ids);
-
-        });
+                $microblog->category = "分类";
+        });    
 
         Microblog::insert($microblogs->toArray());
     }

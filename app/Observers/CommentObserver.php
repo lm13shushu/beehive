@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Comment;
+use App\Models\Microblog;
 use App\Notifications\MicroblogReplied;
 
 

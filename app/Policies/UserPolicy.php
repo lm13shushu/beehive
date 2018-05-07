@@ -22,4 +22,8 @@ class UserPolicy
     public function update(User $currentUser,User $user){
         return $currentUser->id === $user->id;
     }
+
+    public function showCreate(User $currentUser,User $user){
+        return $currentUser->id === $user->id;
+    }
 }

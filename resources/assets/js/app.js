@@ -45,3 +45,18 @@ $('.createForm').click( function() {
 $('.show-person-microblogs').click( function() {
     $('#show-person-info').load('/users/' +　$('.glyphicon-user').attr("value") 　+　'/microblogs');
 });
+
+
+$('.like').click( function() {
+        var like = $(this);
+        var id = like.attr("id");//获取对应微博id
+        like.fadeOut(300); //渐隐效果   
+        $('#like-count-'+id).load('/microblogs/'+id+'/like',function(responseTxt,statusTxt,xhr){
+            if(statusTxt=="success"){
+                 like.fadeIn(300);
+            }else{
+                 like.fadeIn(300);
+                 alert("你已经点赞过！");
+            }
+        });
+});

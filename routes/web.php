@@ -46,3 +46,5 @@ Route::post('/comments/{comment}/destroy','CommentsController@destroy')->name('c
 //通知路由
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
+//点赞漏油
+Route::get('/microblogs/{microblog}/like', 'MicroblogsController@like')->name('microblogs.like');
