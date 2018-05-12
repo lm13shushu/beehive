@@ -29,7 +29,9 @@ class HomeController extends Controller
         $feed_items = [];
         if(Auth::check()){
             $feed_items = Auth::user()->feed()->paginate(20);
+            $active_users = Auth::user()->getActiveUsers();
         }
-        return view('pages.root',compact('feed_items'));
+        //dd($active_users);
+        return view('pages.root',compact('feed_items','active_users'));
     }
 }

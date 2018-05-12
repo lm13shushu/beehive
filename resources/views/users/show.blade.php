@@ -15,7 +15,8 @@
                         <h3>{{ $user->email }}</h3>
                     </div>
                     <div class="user-follow-status">
-                        <h5><a href="{{ route('users.followings',$user->id) }}">正在关注<span class="badge">{{ count($user->followings) }}</span></a>&nbsp;|&nbsp;<a href="{{ route('users.followers',$user->id) }}">粉丝<span class="badge">{{ count($user->followers) }}</span></a></h5>
+                        <h5><a href="{{ route('users.followings',$user->id) }}">正在关注<span class="badge">{{ count($user->followings) }}</span></a>&nbsp;|&nbsp;<a href="{{ route('users.followers',$user->id) }}">粉丝<span class="badge">{{ count($user->followers) }}</span></a>
+                        </h5>
                     </div>
                     <div class="user-follow">
                         <div class="user-follow-form">

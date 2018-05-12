@@ -15,6 +15,13 @@
                     </section>
                 </div>
             </aside>
+            @if (count($active_users))
+                <aside class="col-md-4">
+                    <div class = "col-md-10 col-md-offset-1 well"> 
+                        @include('users._active_users',['active_user' => $active_users])
+                    </div>
+                </aside>
+            @endif
         </div>
     @else
         <div class="container">
