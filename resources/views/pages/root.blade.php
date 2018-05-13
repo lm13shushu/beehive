@@ -3,13 +3,13 @@
 
 @section('content')
     @if(Auth::check())
-        <div class="row">
+        <div class="row" style="margin: 0 auto;">
             <div class="col-md-8 well well-lg" >
                 <h3>微博列表</h3>
                 @include('microblogs._feed')
             </div>
-            <aside class="col-md-4"> 
-                <div class = "col-md-10 col-md-offset-1 well">
+            <aside class="col-md-4" > 
+                <div class = "col-md-11 col-md-offset-1 well">
                     <section class="stats">
                         @include('users._userInfo', ['user' => Auth::user()])
                     </section>
@@ -17,7 +17,7 @@
             </aside>
             @if (count($active_users))
                 <aside class="col-md-4">
-                    <div class = "col-md-10 col-md-offset-1 well"> 
+                    <div class = "col-md-11 col-md-offset-1 well"> 
                         @include('users._active_users',['active_user' => $active_users])
                     </div>
                 </aside>

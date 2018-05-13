@@ -13,6 +13,8 @@ class MicroblogObserver
     public function saving(Microblog $microblog)
     {
         //
+        $microblog->content = clean(htmlspecialchars_decode($microblog->content),'microblog_content');
+        //dd($microblog->content);
         $microblog->excerpt = make_excerpt($microblog->content);
     }
 

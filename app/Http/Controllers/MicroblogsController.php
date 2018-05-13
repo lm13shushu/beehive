@@ -36,15 +36,15 @@ class MicroblogsController extends Controller
     public function show(Microblog $microblog,Request $request)
     {
         //$categories =Category::all();
+        $parentCommentIdsArray = [];
         $commentsList = [];
-        $user = $microblog->User;
-        $comments = $microblog->comments()
-                                            ->orderBy('created_at','desc')
-                                            ->paginate(10);
-        foreach($comments as $k => $comment){
-            $commentsList[$k]=$comment->getDescendantsAndSelf();
+        $user = $microblog->user;
+        $parentComments = $microblog->comments()
+                                                     ->orderBy('created_at','desc')
+                                                     ->paginate(10);
+        foreach($parentComments as $k => $parentComment){
+            $commentsList[$k]=$parentComment->getDescendantsAndSelf();
         }
-        //dd($commentsList);
         //Redis缓存中没有该微博,则从数据库中取值,并存入Redis中,该键值key='microblog:cache'.$id生命时间300s
         $post = Cache::remember('microblog:cache:'.$microblog->id, $this->cacheExpires, function () use ($microblog) {
             return $microblog;
@@ -71,7 +71,7 @@ class MicroblogsController extends Controller
     {
         // fill 方法会将传参的键值数组填充到模型的属性中
         $microblog->fill($request->all());
-        $microblog->user_id =Auth::id();
+        $microblog->user_id = Auth::id();
         $microblog->category = Category::where('id',$request->category_id)->first()->name;
         $microblog->save();
         return redirect()->route('home')->with('message', 'Created successfully.');

@@ -13,7 +13,7 @@ class UsersController extends Controller
 {
     //middleware 方法，该方法接收两个参数，第一个为中间件的名称，第二个为要进行过滤的动作。
     public function __construct(){
-        $this->middleware('auth',['except'=>['index','show']]);
+        $this->middleware('auth',['except'=>['index','show','followings','followers']]);
     }
 
     public function index(){

@@ -9,7 +9,7 @@
          <!-- 该方法的作用是将日期进行友好化处理 -->
          {{ $microblog->created_at->diffForHumans() }}
     </span>
-    <span class="content"><span class="category" style="color:#286090">#{{ $microblog->category }}#</span>{{ $microblog->content }}</span>
+    <span class="content"><span class="category" style="color:#286090">#{{ $microblog->category }}#</span>{!! $microblog->content !!}</span>
     <div class="microblog_status" style="width:100%;height:20px;margin-top:10px;">
         <div style="width:350px;border-radius: 5px;margin-left:50px;">
             <a href="#" style="margin-left:10px">

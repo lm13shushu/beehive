@@ -13,6 +13,11 @@ class CommentsController extends Controller
     //评论存储
     //protected $type;
     //存储评论信息
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function store(Request $request,Microblog $microblog,Comment $comment)
     {
         //dd($microblog->id);

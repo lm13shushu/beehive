@@ -28,6 +28,8 @@
                     <div class="user-name-description">
                         <h5><a href="#"><span class="glyphicon glyphicon-user" value="{{ $user->id }}"></span></a>&nbsp;{{ $user->name }}</h5>
                         <h5><a href="#"><span class="glyphicon glyphicon-tag"></span></a>&nbsp;{{ $user->introduction }}</h5>
+                        <h6>注册于:{{ $user->created_at->diffForHumans() }}&nbsp;&nbsp;&nbsp;&nbsp;
+                            最后活跃:{{ $user->last_actived_at->diffForHumans() }}</h6>
                     </div>
                 </div>
             </div>
