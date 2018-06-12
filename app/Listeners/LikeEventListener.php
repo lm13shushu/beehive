@@ -29,7 +29,6 @@ class LikeEventListener
      */
     public function handle(MicroblogLikeEvent $event)
     {
-        //
         $likeCacheKey='microblog:like:'.$event->microblog_id;
         //Redis命令SISMEMBER检查集合类型Set中有没有该键,Set集合类型中值都是唯一
         $existsInRedisSet = Redis::command('SISMEMBER', [$likeCacheKey, $event->user_id]);

@@ -8,30 +8,30 @@ use Carbon\Carbon;
 trait LastActivedAtHelper
 {
     // 缓存相关
-    protected $hash_prefix = 'larabbs_last_actived_at_';
+    protected $hash_prefix = 'beehive_last_actived_at_';
     protected $field_prefix = 'user_';
 
     public function recordLastActivedAt()
     {
 
-         // Redis 哈希表的命名，如：beehive_last_actived_at_2017-10-21
+         // Redis 哈希表的命名，如：beehive_last_actived_at_2018-5-21
         $hash =$this->getHashFromDateString(Carbon::now()->toDateString());
 
         // 字段名称，如：user_1
         $field = $this->getHashField();
 
-        //dd(Redis::hGetAll($hash));
+         //dd(Redis::hGetAll($hash));
 
-        // 当前时间，如：2017-10-21 08:35:15
+        // 当前时间
         $now = Carbon::now()->toDateTimeString();
 
         // 数据写入 Redis ，字段已存在会被更新
         Redis::hSet($hash, $field, $now);
     }
 
+    //同步数据到数据库中
     public function syncUserActivedAt()
     {
-        // Redis 哈希表的命名，如：beehive_last_actived_at_2017-10-21
          $hash =$this->getHashFromDateString(Carbon::yesterday()->toDateString());
 
         // 从 Redis 中获取所有哈希表里的数据
@@ -39,7 +39,7 @@ trait LastActivedAtHelper
 
         // 遍历，并同步到数据库中
         foreach ($dates as $user_id => $actived_at) {
-            // 会将 `user_1` 转换为 1
+            // 将 `user_1` 转换为 1
             $user_id = str_replace($this->field_prefix, '', $user_id);
 
             // 只有当用户存在时才更新到数据库中
@@ -56,7 +56,6 @@ trait LastActivedAtHelper
     //使用Eloquent的访问器，在获取属性值时，可以使用访问器进行动态修改
     public function getLastActivedAtAttribute($value)
     {
-        // Redis 哈希表的命名，如：beehive_last_actived_at_2017-10-21
         $hash = $this->getHashFromDateString(Carbon::now()->toDateString());
 
         // 字段名称，如：user_1
@@ -76,7 +75,7 @@ trait LastActivedAtHelper
 
     public function getHashFromDateString($date)
     {
-        // Redis 哈希表的命名，如：beehive_last_actived_at_2017-10-21
+        // Redis 哈希表的命名，如：beehive_last_actived_at_2018-5-21
         return $this->hash_prefix . $date;
     }
 

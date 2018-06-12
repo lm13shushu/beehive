@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
 		\App\Models\User::observe(\App\Observers\UserObserver::class);
 		\App\Models\Microblog::observe(\App\Observers\MicroblogObserver::class);
                      \App\Models\Comment::observe(\App\Observers\CommentObserver::class);
+                     \App\Models\Category::observe(\App\Observers\CategoryObserver::class);
         //
          \Carbon\Carbon::setLocale('zh');
     }
@@ -30,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+         if (app()->isLocal()) {
+            $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+        }
     }
 }

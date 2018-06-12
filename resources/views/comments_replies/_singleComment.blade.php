@@ -1,6 +1,6 @@
 <li id="comments-{{ $comment->id }}" style="margin-top:50px;border-bottom:1px solid #f5f5f5;margin:10px auto;">
-    @for ($i=0;$i<$comment->depth;$i++)
-         &nbsp;&nbsp;&nbsp;&nbsp;
+    @for ($i=0;$i<($comment->depth);$i++)
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     @endfor
     <a href="{{ route('users.show', $comment_user->id )}}">
         <img src="{{ $comment_user->avatar }}" alt="{{ $comment_user->name }}" class="avatar img-circle" width="45px" height="45px"/>
@@ -20,7 +20,8 @@
     </span>
     <span class="content">{{ $comment->content }}</span>
     <button  class="show-reply btn btn-link" id="show-reply-{{ $comment->id }}" value="{{ $comment->id }}">回复</button>
-     @can('destroy', $comment)
+
+     @can('destroy',$comment)
         <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" style="float: right;">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
@@ -32,6 +33,7 @@
         @include('common.error')
         {{ csrf_field() }}
         <textarea class="form-control" rows="3" placeholder="发表回复..." name="content">{{ old('content') }}</textarea>
-        <button type="submit" class="btn btn-default pull-right" style="margin-top:10px;">回复</button>
+        <button type="submit" class="btn btn-default pull-right" style="margin-top:5px;">回复</button>
     </form>
+
 </li>

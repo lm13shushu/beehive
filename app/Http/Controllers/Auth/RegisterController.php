@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/followUsers';
 
     /**
      * Create a new controller instance.
@@ -50,7 +50,7 @@ class RegisterController extends Controller
         //表达式里的第二个 captcha 是 mews/captcha 自定义的表单验证规则。扩展包非常巧妙地利用了 Laravel 表单验证器提供的 自定义表单验证规则 功能。
         //第三个参数是用户自定义错误提示
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'captcha'   =>'required|captcha',

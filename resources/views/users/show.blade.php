@@ -7,6 +7,8 @@
       <!-- 顶部用户信息展示 -->
         <div class="row clearfix">
             <div class="col-md-12 column">
+                @include('layouts._message')
+                @include('common.error')
                 <div class="jumbotron user-info">
                     <div class="user-info-avatar">
                         <img src="{{ $user->avatar }}" class="img-circle" width="62px" height="62px">
@@ -19,14 +21,14 @@
                         </h5>
                     </div>
                     <div class="user-follow">
-                        <div class="user-follow-form">
+                        <div class="user-follow-form" id="user-follow-form">
                             @if(Auth::check())
                                 @include('users._follow_form')
                             @endif
                         </div>
                     </div>
                     <div class="user-name-description">
-                        <h5><a href="#"><span class="glyphicon glyphicon-user" value="{{ $user->id }}"></span></a>&nbsp;{{ $user->name }}</h5>
+                        <h5><a href="#"><span class="glyphicon glyphicon-user userId" value="{{ $user->id }}"></span></a>&nbsp;{{ $user->name }}</h5>
                         <h5><a href="#"><span class="glyphicon glyphicon-tag"></span></a>&nbsp;{{ $user->introduction }}</h5>
                         <h6>注册于:{{ $user->created_at->diffForHumans() }}&nbsp;&nbsp;&nbsp;&nbsp;
                             最后活跃:{{ $user->last_actived_at->diffForHumans() }}</h6>
@@ -57,3 +59,14 @@
         </div>
     </div>
 @stop
+
+@section('scripts')
+    <script type="text/javascript">
+        function at(e){
+            var atUserName= e.getAttribute("value");
+            var atUser ="@"+atUserName+";";
+            document.getElementById('atInput').value +=atUser;
+        }
+    </script>   
+@stop
+

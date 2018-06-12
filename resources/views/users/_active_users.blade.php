@@ -1,5 +1,5 @@
 @if (count($active_users))
-    <div class="text-center"><b>活跃用户</b></div>
+    <div class="text-center"><h4>活跃用户</h4></div>
     <hr>
     @foreach ($active_users as $active_user)
         <a class="media" href="{{ route('users.show', $active_user->id) }}">

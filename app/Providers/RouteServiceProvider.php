@@ -14,6 +14,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    
+    //路由群组，指定路由文件中控制器的命名空间
     protected $namespace = 'App\Http\Controllers';
 
     /**
@@ -26,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+        //可以在这里定义路由参数显示绑定模型类
     }
 
     /**

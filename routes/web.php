@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//框架自动加载所有路由
 //主页路由
 Route::get('/','HomeController@index')->name('home');
 
@@ -22,6 +23,12 @@ Route::get('users','UsersController@index')->name('users.index');
 
 //微博增删改查路由
 Route::resource('microblogs', 'MicroblogsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+
+//展示被转发微博路由
+Route::get('/microblogs/{microblog}/showForwardMicroblog', 'MicroblogsController@showForwardMicroblog')->name('microblogs.showForwardMicroblog');
+
+//保存转发信息路由
+Route::post('/microblogs/{microblog}/forward', 'MicroblogsController@forward')->name('microblogs.forward');
 
 //个人页面查看个人微博路由
 Route::get('users/{user}/microblogs','MicroblogsController@showPerson')->name('microblogs.showPerson');
@@ -41,10 +48,26 @@ Route::post('/microblogs/{microblog}/storeComment','CommentsController@store')->
 Route::post('/microblogs/{microblog}/comments/{replyObject}','CommentsController@storeReplies')->name('comments.storeReplies');
 
 //删除回复路由
-Route::post('/comments/{comment}/destroy','CommentsController@destroy')->name('comments.destroy');
+Route::delete('/comments/{comment}','CommentsController@destroy')->name('comments.destroy');
 
 //通知路由
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
-//点赞漏油
+//点赞路由
 Route::get('/microblogs/{microblog}/like', 'MicroblogsController@like')->name('microblogs.like');
+
+//后台无权限访问路由
+Route::get('permission-denied', 'Controller@permissionDenied')->name('permission-denied');
+
+//搜索路由
+Route::get('/microblogSearch', 'SearchController@microblogSearch')->name('search.microblogs');
+Route::get('/userSearch', 'SearchController@userSearch')->name('search.users');
+
+//查看话题下路由
+Route::get('/categories/{category}', 'CategoriesController@show')->name('categories.show');
+
+//新建用户选择关注的用户
+Route::get('/followUsers', 'HomeController@followUsers')->name('home.followUsers');
+
+
+

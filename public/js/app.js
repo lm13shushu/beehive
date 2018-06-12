@@ -993,31 +993,53 @@ var app = new Vue({
     el: '#app'
 });
 
+//加入防止跨域攻击
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
-$(document).ready(function () {
+//打开回复框
+$(document).ready(function (e) {
     $('.show-reply').click(function () {
         var replyId = $(this).attr("value");
         $("#replyForm-" + replyId).toggle();
     });
+
+    $("#bodyPage").fullImages({
+        ImgWidth: 1920,
+        ImgHeight: 980,
+        autoplay: 3500,
+        fadeTime: 1500
+    });
+
+    // var menuYloc = $("#scrollDiv1").offset().top;  
+    $(window).scroll(function () {
+        var offsetTop = $(window).scrollTop() + "px";
+        $("#scrollDiv1").animate({ top: offsetTop }, { duration: 500, queue: false });
+        $("#scrollDiv2").animate({ top: offsetTop }, { duration: 500, queue: false });
+    });
 });
 
+//打开创建微博界面
 $('.createForm').click(function () {
     $('#show-person-info').load('/microblogs/create', function (responseTxt, statusTxt, xhr) {
         if (statusTxt == "success") {
             $("#post_body").qeditor({});
+            // $('#filer_input').filer(); 
+            //console.log('value changed!');  
+            focus();
         }
     });
 });
 
+//查看用户微博
 $('.show-person-microblogs').click(function () {
-    $('#show-person-info').load('/users/' + $('.glyphicon-user').attr("value") + '/microblogs');
+    $('#show-person-info').load('/users/' + $('.userId').attr("value") + '/microblogs');
 });
 
+//点赞
 $('.like').click(function () {
     var like = $(this);
     var id = like.attr("id"); //获取对应微博id
@@ -1031,6 +1053,57 @@ $('.like').click(function () {
         }
     });
 });
+
+//转发
+$('.forward').click(function () {
+    var microblogId = $(this).attr("value");
+    $('#forwardBody').load('/microblogs/' + microblogId + '/showForwardMicroblog');
+});
+
+// //关注用户
+// $('.follow').click( function(){
+//     var userId = $('.userId').attr("value");
+//         $.ajax({
+//         type:   'POST',
+//         url:    '/users/followers/' +  userId,
+//         data:   {_method: 'post' },
+//         success: function(data){
+//            $('#user-follow-form').html(data);
+//         }
+//     });  
+
+// });
+
+// //取消关注
+// $('.followers-destroy').click( function(){
+//     var userId = $('.userId').attr("value");
+//         $.ajax({
+//         type:   'DELETE',
+//         url:    '/users/followers/' +  userId,
+//         data:   {_method: 'delete' },
+//         success: function(data){
+//             $('#user-follow-form').html(data);
+//         }
+//     });  
+// });
+// function focus(){
+//     console.log('1');
+//     $("document").on(  
+//         'keyup',  '#post_body',
+//         function() {  
+//             console.log('2');
+//         });  
+// }
+//  $(function(){ 
+//     setInterval (focus, 2000);
+//     function focus()
+//     {
+//         console.log('2');
+//         $('#post_body').focus(function(){
+//              alert('1');
+//         });
+//     }
+// });
 
 /***/ }),
 /* 11 */

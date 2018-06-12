@@ -36,9 +36,11 @@ class CommentsController extends Controller
 
     public function destroy(Comment $comment)
     {
+        //dd('1');
         $this->authorize('destroy', $comment);
         $comment->delete();
         $mircoblog=$comment->microblog;
         return redirect()->route('microblogs.show',$mircoblog)->with('message', '删除成功！');
     }
+
 }

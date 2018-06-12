@@ -179,6 +179,12 @@ window.QEditor = {
                 }, 100);
             });
             editor.keyup(function(e) {
+                // console.log('1');
+                // var regEn = /[@]/im;
+                // var value =$('#post_body').val();
+                // if(regEn.test(value){
+                //     console.log('1');
+                // }
                 QEditor.checkSectionState(editor);
                 return $(this).change();
             });

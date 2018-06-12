@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @include('layouts._bodyPage')
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default" style="background-color: #f5f8fa">

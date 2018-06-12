@@ -8385,6 +8385,24 @@ body .container {
   padding: 0;
 }
 
+body #bodyPage {
+  width: 100%;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+body img.bg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  display: none;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
@@ -8568,5 +8586,9 @@ aside textarea {
 
 .notifications-badge .badge-hint {
   background-color: #d15b47 !important;
+}
+
+li:hover {
+  background: #f5f5f5;
 }
 

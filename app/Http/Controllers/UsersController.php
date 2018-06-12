@@ -30,7 +30,7 @@ class UsersController extends Controller
     }
     
     public function edit(User $user){
-
+        $this->authorize('edit', $user);
         return view('users.edit',compact('user'));
     }
 
@@ -54,6 +54,7 @@ class UsersController extends Controller
     public function followings(User $user)
     {
         $users = $user->followings()->paginate(30);
+        //dd($users);
         $title = '关注的人';
         return view('users.show_follow', compact('users', 'title'));
     }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top"> 
     <div class="container">
         <div class="navbar-header">
 
@@ -18,8 +18,10 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
-            <ul class="nav navbar-nav">
-
+            <ul class="nav navbar-nav" style="margin-left:100px;">
+                <li style="width:300px;height:48px; line-height:48px;">
+                    @yield('searchType')
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -51,6 +53,14 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            @can('manage_contents')
+                                <li>
+                                    <a href="{{ url(config('administrator.uri')) }}">
+                                        <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+                                        管理后台
+                                    </a>
+                                </li>
+                            @endcan
                             <li>
                                 <a href="{{ route('users.show', Auth::id()) }}">
                                     <span class="glyphicon glyphicon-user"></span>&nbsp;个人页面

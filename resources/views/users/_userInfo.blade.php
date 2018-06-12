@@ -1,4 +1,4 @@
-<div class = "userInfo">
+<div class = "userInfo" style="margin:10px;">
     <div class="user_avatar" style="text-align: center;">
         <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="avatar img-circle" width="62px" height="62px" style="display: inline-block;" />
         <h4>{{ $user->name }}</h4>

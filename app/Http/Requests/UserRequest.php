@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Auth;
 
 class UserRequest extends FormRequest
@@ -18,10 +19,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,' . Auth::id(),
+            'name' => 'required|between:3,25|regex:/^[\x{4e00}-\x{9fa5}A-Za-z0-9-_]+$/u|unique:users,name,'.Auth::id(),
             'email' => 'required|email',
             'introduction' => 'max:80',
-            'avatar' => 'mimes:jpeg,bmp,png,gif|dimensions:min_width=200,min_height=200',
+            'avatar' => 'mimes:jpeg,bmp,png,gif',
         ];
     }
 

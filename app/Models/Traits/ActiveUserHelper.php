@@ -14,14 +14,14 @@ trait ActiveUserHelper
     protected $users = [];       
 
     // 配置信息
-    protected $microblog_weight = 4; // 话题权重
+    protected $microblog_weight = 4; // 微博权重
     protected $comment_weight = 1; // 回复权重
     protected $pass_days = 7;    // 多少天内发表过内容
-    protected $user_number = 6; // 取出来多少用户
+    protected $user_number = 10; // 取出来多少用户
 
     // 缓存相关配置
     protected $cache_key = 'beehive_active_users';
-    protected $cache_expire_in_minutes = 65;
+    protected $cache_expire_in_minutes = 60;
 
     public function getActiveUsers()
     {
@@ -50,10 +50,10 @@ trait ActiveUserHelper
             return $user['score'];
         });
 
-        // 我们需要的是倒序，高分靠前，第二个参数为保持数组的 KEY 不变
+        // 倒序排列，高分靠前，第二个参数为保持数组的 KEY 不变
         $users = array_reverse($users, true);
 
-        // 只获取我们想要的数量
+        // 只获取想要的数量
         $users = array_slice($users, 0, $this->user_number, true);
 
         // 新建一个空集合
@@ -77,8 +77,8 @@ trait ActiveUserHelper
 
     private function calculateMicroblogScore()
     {
-        // 从微博数据表里取出限定时间范围（$pass_days）内，有发表过微博的用户
-        // 并且同时取出用户此段时间内发布微博的数量
+        // 从微博数据表里取出限定时间范围内，有发表过微博的用户
+        // 并且同时取出用户此段时间内发布微博的数量，DB::raw使用sql原生表达式
         $microblog_users = Microblog::query()->select(DB::raw('user_id, count(*) as microblog_count'))
                                      ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
                                      ->groupBy('user_id')
@@ -91,7 +91,7 @@ trait ActiveUserHelper
 
     private function calculateCommentScore()
     {
-        // 从回复数据表里取出限定时间范围（$pass_days）内，有发表过回复的用户
+        // 从回复数据表里取出限定时间范围内，有发表过回复的用户
         // 并且同时取出用户此段时间内发布回复的数量
         $comment_users = Comment::query()->select(DB::raw('from_uid, count(*) as comment_count'))
                                      ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))

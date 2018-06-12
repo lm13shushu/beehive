@@ -11,14 +11,11 @@ class CreateMicroblogsTable extends Migration
             $table->increments('id');
             $table->text('content');
             $table->integer('user_id')->unsigned()->index();
-            $table->integer('category_id')->unsigned()->index();
+            $table->integer('category_id')->unsigned();
             $table->string('category');
             $table->integer('reply_count')->unsigned()->default(0);
             $table->integer('like_count')->unsigned()->default(0);
             $table->integer('view_count')->unsigned()->default(0);
-            $table->integer('order')->unsigned()->default(0);
-            $table->text('excerpt');
-            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }

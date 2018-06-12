@@ -11,12 +11,12 @@
         </div>
 
         <div class="panel-body">
+            @include('common.error')
             <form action="{{ route('users.update', $user->id) }}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-                <input type="hidden" name="_method" value="PUT">
+                <input type="hidden" name="_method" value="PATCH">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                 <div class="form-group">
-                    <label for="name-field"><span class="glyphicon glyphicon-user"></span>用户名</label>
+                    <label for="name-field">用户名</label>
                     <input class="form-control" type="text" name="name" id="name-field" value="{{ old('name', $user->name ) }}" />
                 </div>
                 <div class="form-group">

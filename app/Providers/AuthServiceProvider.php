@@ -12,6 +12,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
+
+    //注册策略，与模型进行绑定
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
         \App\Models\Microblog::class => \App\Policies\MicroblogPolicy::class,

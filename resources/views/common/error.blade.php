@@ -1,3 +1,4 @@
+{{-- $errors变量是的一个Illuminate\Support\MessageBag实例, 总是存在于所有视图中 --}}
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <p>有错误发生:</p>

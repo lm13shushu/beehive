@@ -12,7 +12,6 @@ $factory->define(App\Models\Microblog::class, function (Faker $faker) {
     return [
         // 'name' => $faker->name,
         'content' => $sentence,
-        'excerpt' => $sentence,
         'created_at' => $created_at,
         'updated_at' => $updated_at,
     ];

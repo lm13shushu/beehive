@@ -18,12 +18,18 @@ class Comment extends Baum\Node
         
     }
 
-    public function user(){
+    public function user()
+    {
+
         return $this->belongsTo(User::class,'from_uid');
+
     }
 
-    public function toUser(){
+    public function toUser()
+    {
+
         return $this->belongsTo(User::class,'to_uid');
+        
     }
 
 }

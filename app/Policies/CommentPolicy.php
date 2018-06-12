@@ -22,6 +22,7 @@ class CommentPolicy extends Policy
 
     public function destroy(User $user,Comment $comment)
     {
-        return $user->id === $comment->from_uid;
+        //form_uid设计的是varchar类型
+        return $user->id == $comment->from_uid;
     }
 }

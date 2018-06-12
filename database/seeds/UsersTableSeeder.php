@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         //each() 是 集合对象 提供的 方法，用来迭代集合中的内容并将其传递到回调函数中。
         //makeVisible() 是 Eloquent 对象提供的方法，可以显示 User 模型 $hidden 属性里指定隐藏的字段，此操作确保入库时数据库不会报错。
         $user = factory(User::class)
-                                ->times(10)
+                                ->times(50)
                                 ->make()
                                 ->each(function ($user,$index) use ($faker,$avatars){
                                      $user->avatar = $faker ->randomElement($avatars);
@@ -42,6 +42,8 @@ class UsersTableSeeder extends Seeder
 
         //单独处理第一个用户的数据
         $user = User::find(1);
+        // 初始化用户角色，将 1 号用户指派为『站长』,assignRole() 方法在 HasRoles 中定义
+        $user->assignRole('Founder');
         $user->name = 'Jay';
         $user->email = 'Jay@email.com';
         $user->password=bcrypt('123456');

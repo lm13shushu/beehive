@@ -187,6 +187,9 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         //无限极树状层级结构支持
         Baum\Providers\BaumServiceProvider::class,
+        //搜索服务
+        Laravel\Scout\ScoutServiceProvider::class,
+        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
     ],
 
     /*

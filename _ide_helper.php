@@ -1495,7 +1495,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function guard($name = null)
         {
-            return \Illuminate\Auth\AuthManager::guard($name);
+            return \Illuminate\Auth\AuthManager::g··uard($name);
         }
         
         /**
@@ -12287,7 +12287,7 @@ namespace  {
 
     class Artisan extends \Illuminate\Support\Facades\Artisan {}
 
-    class Auth extends \Illuminate\Support\Facades\Auth {}
+    class ·Auth extends \Illuminate\Support\Facades\Auth {}
 
     class Blade extends \Illuminate\Support\Facades\Blade {}
 

@@ -51,7 +51,6 @@ class Kernel extends HttpKernel
 
             // 开启会话
             \Illuminate\Session\Middleware\StartSession::class,
-
             // 认证用户，此中间件以后 Auth 类才能生效
             // 见：https://d.laravel-china.org/docs/5.5/authentication
             \Illuminate\Session\Middleware\AuthenticateSession::class,

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword;
+use Spatie\Permission\Traits\HasRoles;
+use Laravel\Scout\Searchable;
 use Auth;
 
 class User extends Authenticatable
@@ -17,6 +19,13 @@ class User extends Authenticatable
     use Traits\ActiveUserHelper;
     //记录用户最后的登陆时间
     use Traits\LastActivedAtHelper;
+    //使用laravel-permission提供的trait HasRoles
+    use HasRoles;
+    //使用搜索插件提供的trait
+    use Searchable;
+
+    //主键
+    protected $pk = 'id';
     /**
      * The attributes that are mass assignable.
      *
@@ -35,11 +44,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-//boot方法在用户模型类初始化之后进行加载，在其中添加监听方法
+   //boot方法在用户模型类初始化之后进行加载，在其中添加监听方法
     public static function boot(){
         
         parent::boot();
 
+        //创建激活码
         static::creating(function ($user) {
             $user->activation_token =str_random(30);
         });
@@ -72,7 +82,8 @@ class User extends Authenticatable
     //获取粉丝列表
     public function followers()
     {
-        //在 Laravel 中会默认将两个关联模型的名称进行合并并按照字母排序,把关联表名改为 followers,user_id是关联中模型外键名，follower_id是合并模型的外键名
+        //在多对多关系中，会新建一张表来存放多对多关系的数据，把表名改为followers
+        //user_id作为关联关系的外键，follower_id作为连接到的模型的外键名称。
         return $this->belongsToMany(User::class,'followers','user_id','follower_id');
     }
 
@@ -90,12 +101,14 @@ class User extends Authenticatable
         }
         //Sync方法接收两个参数，第一个参数是要添加的id，第二个参数是是否移除之前的关联id
          $this->followings()->sync($user_ids, false);
+         return true;
 
     }
 
     //取消关注
     public function unfollow($user_ids)
     {
+        //detach方法接受数组
         if (!is_array($user_ids)) {
             $user_ids = compact('user_ids');
         }
@@ -125,4 +138,43 @@ class User extends Authenticatable
         $this->unreadNotifications->markAsRead();
     }
 
+    //模型修改器，当给属性赋值时，修改器自动调用
+    public function setPasswordAttribute($value)
+    {
+         // 如果值的长度等于 60，即认为是已经做过加密的情况
+        if (strlen($value) != 60) {
+
+            // 不等于 60，做密码加密处理
+            $value = bcrypt($value);
+        }
+
+        $this->attributes['password'] = $value;
+    }
+
+     public function setAvatarAttribute($path)
+    {
+        // 如果不是 'http' 开头，那就是从后台上传的，需要补全 URL
+        if ( ! starts_with($path, 'http')) {
+
+            // 拼接完整的 URL
+            $path = config('app.url') . "/uploads/images/avatars/$path";
+        }
+
+        $this->attributes['avatar'] = $path;
+    }
+    
+    //定义要查询的字段
+    public function toSearchableArray()
+    {
+        return [
+            'user_name' => $this->name,
+            'user_email' => $this->email,
+        ];
+    }
+
+    //定义索引里的type值
+    public function searchableAs()
+    {
+        return 'user';
+    }
 }
